@@ -30,15 +30,27 @@ import zigZag from "./sounds/zig-zag.mp3";
 
 
 class Sounds extends Component {
+    static defaultProps = {
+        sounds: [
+            bubbles, clay, confetti, corona, spiral, flash1, flash2, flash3, glimmer, moon, pinwheel,
+            piston1, piston2, piston3, prism1, prism2, prism3, splits, squiggle, strike, suspension, timer,
+            ufo, veil, wipe, zigZag
+        ]
+    }
+
     constructor(props){
         super(props);
         this.state = {
-            sound: bubbles
+            sound: bubbles,
+            playing: false
         }
         this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleKeyPress(e){
+
+        this.setState({playing: true});
         
         if(e.keyCode === 65){
             this.setState({sound: bubbles})
@@ -145,13 +157,19 @@ class Sounds extends Component {
         }
     }
 
+    handleClick(){
+        var randIdx = Math.floor(Math.random() * this.props.sounds.length)
+        this.setState({sound: this.props.sounds[randIdx], playing: true})
+    }
+
     render() {
-         var {sound} = this.state;
+         var {sound, playing} = this.state;
         return (
-             <div onKeyDown={this.handleKeyPress} tabIndex={0} style={{position: "absolute", height: "100vh", width: "100%"}}>
+             <div onKeyDown={this.handleKeyPress} tabIndex={0} style={{position: "absolute", height: "100vh", width: "100%"}}
+                 onClick={this.handleClick}>
                  <ReactHowler
                  src={sound}
-                 playing={true}
+                 playing={playing}
                  />
              </div>
         )
