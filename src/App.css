@@ -1,14 +1,31 @@
-.animate-side {
-    animation: sideways 2s ease-in-out;
+.animate-left {
+    animation: leftwards 2s ease-in-out;
     animation-fill-mode: backwards;
 }
 
-@keyframes sideways {
+@keyframes leftwards {
     0% {
         transform: translateX(100%);
     }
     50% {
         transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.animate-right {
+    animation: rightwards 2s ease-in-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes rightwards {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
     }
     100% {
         transform: translateX(0%);
@@ -29,6 +46,40 @@
     }
     100% {
         transform: translateY(0%);
+    }
+}
+
+.animate-down {
+    animation: downward 2s ease-in-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes downward {
+    0% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.animate-size {
+    animation: size 2s ease-in-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes size {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
