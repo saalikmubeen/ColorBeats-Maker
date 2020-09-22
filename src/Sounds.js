@@ -66,7 +66,8 @@ class Sounds extends Component {
         ],
         colors: [
              a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
-        ]
+        ],
+        animations: ["animate-side", "animate-up"]
     }
 
     constructor(props){
@@ -209,14 +210,16 @@ class Sounds extends Component {
 
     render() {
          var {sound, playing, background, animate, showing } = this.state;
+         var {animations} = this.props;
         return (
              <div onKeyDown={this.handleKeyPress} tabIndex={0} style=
                {{ height: "100vh", width: "100%", background: background}}
-                 onClick={this.handleClick} className={animate ? "animate container" : "container"}>
+                 onClick={this.handleClick} className={animate ? animations[Math.floor(Math.random() * 2)] : "container"}>
                      {showing && <p className="message">Press any key, A to Z or tap and turn up speakers</p>}
                  <ReactHowler
                  src={sound}
                  playing={playing}
+                 volume={1.0}
                  />
              </div>
         )

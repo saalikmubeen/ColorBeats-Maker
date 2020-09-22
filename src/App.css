@@ -1,28 +1,46 @@
-.animate {
-    animation: slide 2s ease-in-out;
+.animate-side {
+    animation: sideways 2s ease-in-out;
     animation-fill-mode: backwards;
 }
 
-@keyframes slide {
+@keyframes sideways {
     0% {
-        transform: scale(0);
+        transform: translateX(100%);
     }
     50% {
-        transform: scale(2);
+        transform: translateX(-100%);
     }
     100% {
-        transform: scale(1);
+        transform: translateX(0%);
+    }
+}
+
+.animate-up {
+    animation: upward 2s ease-in-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes upward {
+    0% {
+        transform: translateY(100%);
+    }
+    50% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
     }
 }
 
 .container {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
 .message {
     display: inline-block;
+    margin-top: 100px;
+    align-self: flex-start;
     color: rgba(0, 0, 0, 0.6);
     background-color: rgba(225, 225, 225, 0.9);
     border-radius: 6px;
