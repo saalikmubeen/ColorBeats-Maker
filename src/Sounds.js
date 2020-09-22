@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactHowler from 'react-howler';
+import "./App.css";
 
 import bubbles from "./sounds/bubbles.mp3";
 import clay from "./sounds/clay.mp3";
@@ -73,7 +74,9 @@ class Sounds extends Component {
         this.state = {
             sound: bubbles,
             playing: false,
-            background: ""
+            background: "",
+            animate: false,
+            showing: true
         }
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -81,7 +84,11 @@ class Sounds extends Component {
 
     handleKeyPress(e){
 
-        this.setState({playing: true});
+        this.setState({playing: true, animate: true, showing: false});
+
+        setTimeout(() => {
+            this.setState({animate: false})
+        }, 1000);
         
         if(e.keyCode === 65){
             this.setState({sound: bubbles, background: a})
@@ -190,16 +197,23 @@ class Sounds extends Component {
 
     handleClick(){
         var randIdx = Math.floor(Math.random() * this.props.sounds.length)
-        this.setState({sound: this.props.sounds[randIdx], playing: true, 
-                       background: this.props.colors[randIdx]})
+        this.setState({
+                      sound: this.props.sounds[randIdx], 
+                       playing: true, animate: true, showing: false,
+                       background: this.props.colors[randIdx]});
+
+       setTimeout(() => {
+          this.setState({animate: false})
+      }, 1000);
     }
 
     render() {
-         var {sound, playing, background} = this.state;
+         var {sound, playing, background, animate, showing } = this.state;
         return (
              <div onKeyDown={this.handleKeyPress} tabIndex={0} style=
-               {{position: "absolute", height: "100vh", width: "100%", background: background}}
-                 onClick={this.handleClick}>
+               {{ height: "100vh", width: "100%", background: background}}
+                 onClick={this.handleClick} className={animate ? "animate container" : "container"}>
+                     {showing && <p className="message">Press any key, A to Z or tap and turn up speakers</p>}
                  <ReactHowler
                  src={sound}
                  playing={playing}
